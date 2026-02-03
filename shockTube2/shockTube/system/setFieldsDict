@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM
+   \\    /   O peration     |
+    \\  /    A nd           |
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setFieldsDict;
+}
+
+// Set default values for the whole domain
+defaultValues
+{
+    U       (0 0 0);     // whole domain
+    T       0.0;         // whole domain
+}
+
+// Define regions where fields are overwritten
+zones
+{
+    hotRegion
+    {
+        type        box;
+        zoneType    cell;
+
+        // box from (-0.5 -1 -1) to (0.5 1 1)
+        box         (-0.5 -1 -1) (0.5 1 1);
+
+        values
+        {
+            T       1.0;    // patch T only inside this box
+        }
+    }
+}
+
+// ************************************************************************* //
